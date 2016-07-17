@@ -1,0 +1,3 @@
+#!/bin/sh
+
+dmenu_run -i -p "> " -nb "#1A1A1A" -nf "#77438F" -sb "#272727" -sf "#348c51"

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Get file without path
+BNAME=$(basename "$1")
+
+# Get file name without extension
+FNAME=${BNAME%.*}
+
+# Get extension of file
+EXT=${BNAME##*.}
+
+
+case ${EXT} in
+    "pdf")
+        [ -f $1 ] && okular $1 > /dev/null 2>&1 || echo "File not found"
+        
+
+        ;;
+    *)
+        echo "File name is not supported"
+        ;;
+esac

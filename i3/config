@@ -1,0 +1,260 @@
+# i3 config file (v4)
+
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+#
+# Define variable
+#
+
+set $mod Mod4
+set $meta Mod1
+set $ctrl control
+
+
+#
+# Applications
+#
+bindsym $mod+$ctrl+$meta+l exec --no-startup-id /home/tspyimt/.bin/lockscreen
+bindsym $mod+$ctrl+$meta+backslash exec --no-startup-id /home/tspyimt/.bin/config-keymap-normal
+bindsym $mod+$ctrl+$meta+at exec --no-startup-id /home/tspyimt/.bin/config-keymap-altgr
+bindsym $mod+$ctrl+$meta+a exec --no-startup-id /home/tspyimt/.bin/config-keymap-us
+
+
+# Monitors
+# One monitor
+bindsym $mod+Shift+$meta+F12        exec --no-startup-id /home/tspyimt/.bin/1-moni
+bindsym $mod+Shift+$meta+F9         exec --no-startup-id /home/tspyimt/.bin/2-moni
+
+# font pango:DejaVu Sans Mono 8
+font pango:SFNS Text MediumP4 10
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Use these key for focus, movement, and resize directions when reaching for arrows is not convenient
+
+
+# start a terminal
+# bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
+
+# start dmenu (a program launcher)
+# -fn "terminus-10"
+bindsym $mod+d exec --no-startup-id dmenu_run -i -p "> " -nb "#1A1A1A" -nf "#77438F" -sb "#272727" -sf "#348c51"
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+
+
+# switch to workspace
+# ♬ ✪ ☢ ★ ☕ ☔ ⌘ ☤ ⍩ ☉ ⚔ ⚛ ☣ ☃ ☢ ☪ • ⚫ ♦
+
+# Dashboard
+bindsym $mod+$meta+at               workspace ✪
+bindsym $mod+$ctrl+at            move workspace ✪
+
+# Yin Yang
+bindsym $mod+$meta+numbersign       workspace ☯
+bindsym $mod+$ctrl+numbersign    move workspace ☯
+assign [class="Emacs"] ☯
+# workspace ☯ output VGA1
+
+# Relax
+bindsym $mod+$meta+asterisk         workspace ☕
+bindsym $mod+$ctrl+asterisk      move workspace ☕
+
+# Command line
+bindsym $mod+$meta+exclam           workspace ⌘
+bindsym $mod+$ctrl+exclam        move workspace ⌘
+
+# Communication
+bindsym $mod+$meta+minus            workspace ⚔
+bindsym $mod+$ctrl+minus         move workspace ⚔
+
+# Web
+bindsym $mod+$meta+bracketright     workspace ⚛
+bindsym $mod+$ctrl+bracketright  move workspace ⚛
+assign [class="Chromium"] ⚛
+
+# File
+bindsym $mod+$meta+plus             workspace ☢
+bindsym $mod+$ctrl+plus          move workspace ☢
+
+
+bindsym $mod+Escape workspace back_and_forth
+
+
+# kill focused window
+bindsym $mod+$ctrl+q kill
+
+
+# change focus
+bindsym $mod+$ctrl+h focus left
+bindsym $mod+$ctrl+t focus down
+bindsym $mod+$ctrl+c focus up
+bindsym $mod+$ctrl+n focus right
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+
+# move focused window
+bindsym $mod+$ctrl+Shift+h move left
+bindsym $mod+$ctrl+Shift+t move down
+bindsym $mod+$ctrl+Shift+c move up
+bindsym $mod+$ctrl+Shift+n move right
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+
+# split in horizontal orientation
+bindsym $mod+$ctrl+g split h
+
+# split in vertical orientation
+bindsym $mod+$ctrl+r split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+$ctrl+f fullscreen
+
+# change container layout (stacked, tabbed, default, toggle split)
+bindsym $mod+$ctrl+w layout stacking
+bindsym $mod+$ctrl+v layout tabbed
+bindsym $mod+$ctrl+z layout default
+# bindsym $mod+period layout toggle split
+
+
+# toggle tiling / floating
+bindsym $mod+$ctrl+BackSpace floating toggle
+
+# change focus between tiling / floating windows (not working, need debug)
+bindsym $mod+$ctrl+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+$ctrl+Return focus parent
+# focus the child container
+bindsym $mod+Shift+$ctrl+Return focus child
+
+# Middle clicking on title bar kills the window
+# bindsym --release button2 kill
+
+# Right clicking on title bar toggle floating
+# bindsym button3 floating toggle
+
+# move focused container to workspace
+bindsym $mod+Shift+percent move container to workspace 1
+bindsym $mod+Shift+7 move container to workspace 2
+bindsym $mod+Shift+5 move container to workspace 3
+bindsym $mod+Shift+3 move container to workspace 4
+bindsym $mod+Shift+1 move container to workspace 5
+bindsym $mod+Shift+9 move container to workspace 6
+bindsym $mod+Shift+0 move container to workspace 7
+bindsym $mod+Shift+2 move container to workspace 8
+bindsym $mod+Shift+4 move container to workspace 9
+bindsym $mod+Shift+6 move container to workspace 10
+
+
+
+bindsym $mod+$meta+Next      scratchpad show
+bindsym $mod+$ctrl+Next      move scratchpad
+
+# reload the configuration file
+bindsym $mod+$meta+$ctrl+R reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# bindsym $mod+Shift+r restart
+bindsym $mod+$meta+$ctrl+BackSpace restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+greater exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym t resize grow height 10 px or 10 ppt
+        bindsym n resize shrink height 10 px or 10 ppt
+        bindsym s resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+p mode "resize"
+
+#
+# Workspace settings
+#
+default_orientation auto
+# workspace_layout tabbed
+workspace_layout stacking
+popup_during_fullscreen smart
+
+
+# class                 border  backgr. text    indicator
+# client.focused          #4c7899 #804488 #f6f6f6 #2e9ef4
+client.focused          #4c7899 #673AB7 #f6f6f6 #0f0
+client.focused_inactive #333333 #555555 #f6f6f6 #484e50
+client.unfocused        #333333 #222222 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
+
+
+# Enable floating for mplayer2
+for_window [class="mplayer2"]               floating enable
+for_window [class="ffplay"]                 floating enable
+for_window [title="Event Tester"]           floating enable
+# for_window [title="Copying"]                floating enable
+# for_window [title="Moving"]                 floating enable
+# for_window [class="Emacs"] floating enable
+
+
+# start few program as daemon
+# exec --no-startup-id dvp
+# exec --no-startup-id urxvtd
+
+# exec --no-startup-id ~/.bin/autostart
+
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+
+bar {
+    status_command i3status -c ~/.i3/i3status.conf
+    # tray_output none
+    tray_output primary
+    # position top
+    # font pango:Droid Sans 9
+    colors {
+        background #212121
+        #statusline #55FF55
+
+	# Class		   Text    backgr.	
+    	focused_workspace  #ffffff #673AB7
+        active_workspace   #ffffff #333333
+    	inactive_workspace #000000 #9E9E9E
+    	urgent_workspace   #ffffff #900000
+    }
+}
+
+# exec --no-startup-id feh --bg-fill /home/tspyimt/Pictures/black-world-map.png
+# exec --no-startup-id feh --bg-fill /home/tspyimt/Pictures/4068x2592.jpg
+# exec --no-startup-id feh --bg-fill /home/tspyimt/Pictures/Assassin-PC.jpg
+exec --no-startup-id /home/tspyimt/.bin/set-bg
+exec --no-startup-id /home/tspyimt/.bin/config-keymap-normal

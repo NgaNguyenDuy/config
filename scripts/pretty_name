@@ -1,0 +1,11 @@
+#!/bin/bash
+
+##
+## This script will convert all your spaces to underscores, remove characters
+## like {}, (), \! and convert the filename to lowercase. If you just want to
+## to convert space to underscore -> mv -v "$FILE" `echo $FILE | tr ' ' '_' `
+## 
+ls | while read -r FILE
+do
+    mv -v "$FILE" `echo $FILE | tr ' ' '_' | tr -d '[{}(),\!]' | tr -d "\'" | tr '[A-Z]' '[a-z]' | sed 's/_-_/_/g'`
+done

@@ -1,0 +1,54 @@
+#!/bin/bash
+
+[ -f ~/.define-colors ] && source ~/.define-colors || (echo "Cannot load source colors. Need check!" && exit 1)
+
+## Selection input: The X server maintains three selections, called PRIMARY, SECONDARY and CLIPBOARD.
+## PRIMARY is conventionally used to implement copying and pasting via middle mouse button. SECONDARY,
+## CLIPBOARD are used by application programs.
+
+
+req_progs=(xsel)
+
+for p in ${req_progs[@]}; do
+    if ! hash "$p" >/dev/null 2>&1; then
+        printf "${style_codes[bold]}${fg_codes[red]}%s${reset_codes[rsall]}: Command not found!\n" "$p" >&2
+        exit 1
+    fi
+done
+
+function notify {
+    notify-send -u normal "$1"
+}
+
+
+if [ "$USER" == "root" ]; then
+    echo "Should not use the root account" && exit 1
+fi
+
+if [ "$#" -eq 1 ]; then
+    case "$1" in
+        "-b")
+            xsel -i -b && notify "Copy to CLIPBOARD sucess!"
+            ;;
+        "-p")
+            xsel -i -p && notify "Copy to PRIMARY sucess!"
+            ;;
+        "-s")
+            xsel -i -s && notify "Copy to SECONDARY success!"
+            ;;
+        "ssh")
+            cat $HOME/.ssh/id_rsa.pub | xsel -b && notify normal "Copy SSH public key to clipboard!"
+            ;;
+        *)
+            echo "Usage: Use -p for primary, -s for secondary and -b for clipboard."
+            ;;
+    esac
+elif [ "$#" -eq 0 ]; then
+    # echo "Enter the text will be copy: (Press Control+D to save)"
+    echo "fu"
+    xsel -i -b && notify "Copy to CLIPBOARD sucess!"
+else
+    echo "Usage: Use -p for primary, -s for secondary and -b for clipboard."
+    exit 1
+fi
+

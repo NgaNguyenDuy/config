@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Get current session name
+SESSION=`tmux display -p "#S"`
+
+tmux command-prompt -p "Rename current session to:" "rename-session -t $SESSION '%%'"

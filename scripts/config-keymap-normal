@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Config keymap normal
+
+[ -f ~/.Xmodmap ] && setxkbmap us -variant dvp -option lv3:ralt_alt && xmodmap ~/.Xmodmap && notify-send -t 2 -u normal "Switched keymap normal successeful" && exit 0

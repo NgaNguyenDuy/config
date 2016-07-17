@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Config keymap with altgr
+
+[ -f ~/.Xmodmap.altgr ] && setxkbmap us -variant dvp -option lv3:ralt_alt && xmodmap ~/.Xmodmap.altgr && notify-send -t 2 -u low "Switched keymap with altgr successeful" && exit 0

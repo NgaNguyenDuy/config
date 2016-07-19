@@ -1,3 +1,6 @@
 [submodule "emacs"]
 	path = emacs
 	url = git@github.com:NgaNguyenDuy/emacs.git
+[submodule ".zsh/zsh-syntax-highlighting"]
+	path = .zsh/zsh-syntax-highlighting
+	url = git@github.com:zsh-users/zsh-syntax-highlighting.git

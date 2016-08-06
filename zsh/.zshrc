@@ -24,10 +24,10 @@ c3="yellow"
 
 
 # Load alias
-source ~/.aliasrc
+source ~/.zsh/aliasrc
 
 # Load env
-source ~/.set_env
+source ~/.zsh/set_env
 
 source ~/.zsh/checks.zsh
 

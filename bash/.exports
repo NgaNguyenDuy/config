@@ -9,9 +9,10 @@ export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL=ignoredups
 # Make some commands not show up in history
 export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
-PATH=$PATH:~/.bin
+PATH=$PATH:~/.bin:~/.local/bin:~/.fzf/bin
 
 export GTK_IM_MODULE=ibus
 export QT4_IM_MODULE=xim
 export QT_IM_MODULE=xim
 export XMODIFIERS=@im=ibus
+export FZF_TMUX_HEIGHT=10

@@ -1,4 +1,3 @@
-#!/bin/sh
 
 # checks (stolen from zshuery)
 if [[ $(uname) = 'Linux' ]]; then

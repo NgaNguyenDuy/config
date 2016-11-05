@@ -21,19 +21,27 @@ c1="red"
 c2="green"
 c3="yellow"
 
+source ~/.zsh/aliasrc.zsh
 
-
-# Load alias
-source ~/.aliasrc
-
-# Load env
-source ~/.set_env
+source ~/.zsh/env.zsh
 
 source ~/.zsh/checks.zsh
 
 source ~/.zsh/setopts.zsh
 
 source ~/.zsh/functions.zsh
+
+source ~/.zsh/auto-sudo-last-cmd.zsh
+
+source ~/.zsh/wordchars.zsh
+
+source ~/.zsh/completion.zsh
+
+source ~/.zsh/f.zsh
+
+source ~/.zsh/listdirs.zsh
+
+source ~/.zsh/bindkeys.zsh
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -60,43 +68,11 @@ fi
 # fi
 
 
-#------------------------------
-# Comp stuff
-#------------------------------
-autoload -Uz compinit
-compinit
 
 autoload colors
 colors
 
 autoload -U add-zsh-hook
-
-
-# Default compinit will not automatically find new executables in the $PATH.
-# This 'rehash' can be set to happen automatically
-zstyle ':completion:*' rehash true
-
-
-zstyle ':completion:*' menu select=2
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-
-highlights='${PREFIX:+=(#bi)($PREFIX:t)(?)*==$color[red]=$color[green];$color[bold]}':${(s.:.)LS_COLORS}}
-zstyle -e ':completion:*' list-colors \
-	'reply=( "'$highlights'" )'
-unset highlights
-
-
-
-
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-
-
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-
-
 
 
 setopt autopushd pushdsilent pushdtohome
@@ -108,15 +84,26 @@ setopt pushdignoredups
 setopt pushdminus
 
 
-# if [ -n "$TMUX" ]; then
-#     echo "inside TMUX"
-# else
-#     echo "outside tmux"
+if ! [ -n "$TMUX" ]; then
+    lastlogin
+fi
+
+# TMUX
+# First, check tmux is installed?
+# if which tmux >/dev/null 2>&1; then
+#     # if no session is started, start a new session
+#     test -z ${TMUX} && tmux new -s "$USER@basic"
+
+#     # when quitting tmux, try to attach
+#     while test -z ${TMUX}; do
+#         tmux attach || break
+#     done
 # fi
 
 # fpath=(~/.zsh/functions $fpath)
 # Load git prompt
 [ -f ~/.zsh/git_prompt ] && source ~/.zsh/git_prompt
+
 
 # For syntax zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

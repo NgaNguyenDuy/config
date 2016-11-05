@@ -1,4 +1,3 @@
-#!/bin/sh
 #------------------------------
 # ShellFuncs
 #------------------------------
@@ -28,22 +27,27 @@ start_agent() {
      echo succeeded
      chmod 600 "${SSH_ENV}"
      . "${SSH_ENV}" > /dev/null
-     /usr/bin/ssh-add;
+     /usr/bin/ssh-add ~/.ssh/github_rsa;
+}
+
+virtualenv_info() {
+    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
 
 generate_prompt() {
+
     export PROMPT="%F{magenta}---%f %B%F{yellow}%(t.Ding!.%T)%f%b %B%F{cyan}%n@%m%f%b %B%F{green}%~%f%b %F{magenta}---%f
 %B%F{$c1}❯%F{$c2}❯%F{$c3}❯ %K{white}%F{red}%(?..(%?%)%k )%k%b% %B"
 
-    export RPROMPT='$(git_super_status)'
+    export RPROMPT="$(git_super_status)"
 }
 
 generate_pattern_colors() {
     colors=("red" "green" "yellow")
-    # echo ${#colors[@]} 
+    # echo ${#colors[@]}
     rand=$(( $RANDOM % (3) + 1 ))
     c1=${colors[$rand]}
-    
+
     if [ "$rand" -eq 2 ]; then
         tmp_c2=$(( $rand + 1 ))
         tmp_c3=$(( $rand - 1 ))
@@ -54,19 +58,27 @@ generate_pattern_colors() {
         tmp_c2=$(( $rand +1 ))
         tmp_c3=$(( $rand +2 ))
     fi
-    
+
     c2=${colors[$tmp_c2]}
     c3=${colors[$tmp_c3]}
 }
 
 preexec () {
-    
+
 }
 
-
 precmd () {
-    generate_pattern_colors
-    generate_prompt
+    # generate_pattern_colors
+    # generate_prompt
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        # Strip out the path and just leave the env name
+        venv="${VIRTUAL_ENV##*/}"
+        export PROMPT="( $venv ) ❯❯❯ "
+    else
+        # In case you don't have one activated
+        generate_pattern_colors
+        generate_prompt
+    fi
     # Dynamic title in terminal
     print -Pn "\e]0;zsh-%l %(1j,%j job%(2j|s|); ,)%~\a"
 }
